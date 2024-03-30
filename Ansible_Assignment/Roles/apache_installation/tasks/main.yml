@@ -1,0 +1,8 @@
+#Installing apache and git for ubuntu and centos
+- name: install apache and git
+  tags: apache,apache2,ubuntu,centos
+  package:
+    name:
+      - "{{ apache_package }}"
+      - "{{ git_package }}"
+    state: present

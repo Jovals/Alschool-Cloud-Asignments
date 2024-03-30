@@ -1,0 +1,26 @@
+- name: copy git repository for site
+  tags: apache,apache2,httpd
+  synchronize:
+    src: /home/vagrant/Ansible/git_assignment/AltSchool-Assignment3/
+    dest: /var/www/html/
+    recursive: yes
+
+
+
+# - name: install git
+#   package:
+#     name: git
+#     state: present
+
+# - name: Clone Github repository and change permissions
+#   git:
+#     repo: https://github.com/Jovals/AltSchool-Assignment3.git
+#     dest: /var/www/html/index.html
+
+# - name: Set ownership and permissions
+#   file:
+#     path: /var/www/html/index.html
+#     owner: root
+#     group: root
+#     mode: 0755
+#     recurse: yes

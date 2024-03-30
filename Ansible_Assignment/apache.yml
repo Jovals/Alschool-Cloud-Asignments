@@ -1,0 +1,53 @@
+---
+- hosts: all
+  become: true
+  pre_tasks:
+
+    - name: install updates (centOS)
+      tags: always
+      yum:
+        update_only: yes
+        update_cache: yes
+      when: ansible_os_family == 'RedHat'
+
+    - name: install updates (Ubuntu)
+      tags: always
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_os_family == 'Ubuntu'
+
+- hosts: all
+  become: true
+  roles: 
+    - apache_installation
+
+- hosts: CentOS_servers
+  become: true
+  roles:
+    - start_centos_httpd
+
+- hosts: all
+  become: true
+  roles:
+    - hosting_assignment
+        
+
+    # - name: Start Apache
+    #   service:a
+    #     name: httpd
+    #     state: started
+    #     enabled: true
+    # - name: Create index.html
+    #   copy:
+    #     content: "Hello World"
+    #     dest: /var/www/html/index.html
+    # - name: Open port 80
+    #   firewalld:
+    #     service: http
+    #     permanent: true
+    #     state: enabled
+    #     immediate: true
+    # - name: Reload firewall
+    #   firewalld:
+    #     state: reloaded

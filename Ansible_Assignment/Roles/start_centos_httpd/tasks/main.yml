@@ -1,0 +1,25 @@
+#Start and enable apache for centos
+- name: start and enable apache services
+  tags: apache,centos,httpd
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
+  when: ansible_distribution == "CentOS"
+
+#Open port 80/tcp for centos
+- name: Open port 80/tcp in firewalld
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+  when: ansible_distribution == "CentOS"
+  notify:
+    - Reload firewalld
+
+#Reload firewall for centos
+- name: Reload firewalld service
+  service:
+    name: firewalld
+    state: reloaded
+

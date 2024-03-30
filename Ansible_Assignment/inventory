@@ -1,0 +1,5 @@
+[CentOS_servers]
+192.168.56.5 apache_package=httpd apache_service=httpd git_package=git
+
+[Ubuntu_servers]
+192.168.56.3 apache_package=apache2 apache_service=apache2 git_package=git
